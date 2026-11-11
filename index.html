@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Lanaya's Birthday Adventure</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+body{
+    font-family:Trebuchet MS,sans-serif;
+    background:#120b2e;
+    color:white;
+}
+
+.scene{
+
+    position:absolute;
+    inset:0;
+
+    display:none;
+
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    padding:10px 15px;
+
+    background:
+    radial-gradient(circle at top,
+    #4a2f96,
+    #120b2e);
+
+}
+
+.scene.active{
+    display:flex;
+}
+
+.slide-left{
+    animation:slideFromRight .45s ease;
+}
+
+.slide-right{
+    animation:slideFromLeft .45s ease;
+}
+
+@keyframes slideFromRight{
+
+    from{
+        transform:translateX(100%);
+        opacity:.3;
+    }
+
+    to{
+        transform:translateX(0);
+        opacity:1;
+    }
+}
+
+@keyframes slideFromLeft{
+
+    from{
+        transform:translateX(-100%);
+        opacity:.3;
+    }
+
+    to{
+        transform:translateX(0);
+        opacity:1;
+    }
+}
+
+.story-image{
+
+    width:95%;
+    max-width:500px;
+
+    max-height:72vh;
+
+    object-fit:contain;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 0 35px rgba(255,215,0,.35);
+
+}
+
+.chapter{
+
+    margin-top:12px;
+
+    font-size:1.4rem;
+
+    color:#ffd86f;
+
+    font-weight:bold;
+
+}
+
+.progress{
+
+    margin-top:6px;
+
+    font-size:14px;
+
+    color:#ffd86f;
+
+}
+
+.caption{
+
+    margin-top:8px;
+
+    max-width:700px;
+
+    line-height:1.5;
+
+    font-size:1rem;
+}
+
+.nav-buttons{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:15px;
+
+    justify-content:center;
+}
+
+.nav-buttons button{
+
+    background:#ffd166;
+
+    color:black;
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:30px;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.star{
+
+    position:fixed;
+
+    color:white;
+
+    animation:twinkle 3s infinite;
+
+    pointer-events:none;
+}
+
+@keyframes twinkle{
+
+    50%{
+        opacity:.2;
+    }
+}
+
+.butterfly{
+
+    position:fixed;
+
+    font-size:30px;
+
+    pointer-events:none;
+
+    animation:fly 15s linear infinite;
+}
+
+@keyframes fly{
+
+    0%{
+        left:-50px;
+        top:25%;
+    }
+
+    100%{
+        left:110vw;
+        top:60%;
+    }
+}
+
+.memory-star{
+
+    font-size:55px;
+
+    cursor:pointer;
+
+    margin-top:20px;
+}
+
+.memory-message{
+
+    display:none;
+
+    margin-top:15px;
+
+    max-width:600px;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    background:
+    rgba(255,255,255,.12);
+
+}
+
+.confetti{
+
+    position:fixed;
+
+    width:10px;
+    height:10px;
+
+    top:-20px;
+}
+
+.swipe-hint{
+
+    position:fixed;
+
+    bottom:8px;
+
+    width:100%;
+
+    text-align:center;
+
+    font-size:12px;
+
+    color:#cccccc;
+
+    pointer-events:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="butterfly">🦋</div>
+
+<div class="swipe-hint">
+👈 Swipe left/right or use buttons 👉
+</div>
+
+<!-- PAGE 1 -->
+
+<div class="scene active">
+
+<img class="story-image"
+src="Opening Scene.png">
+
+<div class="chapter">
+Lanaya's Birthday Adventure
+</div>
+
+<div class="progress">
+Page 1 of 8
+</div>
+
+<div class="caption">
+A magical journey for a very special 10-year-old.
+</div>
+
+<div class="nav-buttons">
+
+<button onclick="nextScene()">
+Begin Adventure ✨
+</button>
+
+</div>
+
+</div>
+
+<!-- PAGE 2 -->
+
+<div class="scene">
+
+<img class="story-image"
+src="Golden Butterfly.png">
+
+<div class="chapter">
+The Golden Butterfly
+</div>
+
+<div class="progress">
+Page 2 of 8
+</div>
+
+<div class="caption">
+A magical butterfly arrives with an invitation to an unforgettable adventure.
+</div>
+
+<div class="nav-buttons">
+
+<button onclick="previousScene()">
+⬅ Previous
+</button>
+
+<button onclick="nextScene()">
+Next ➡
+</button>
+
+</div>
+
+</div>
+
+<!-- PAGE 3 -->
+
+<div class="scene">
+
+<div class="chapter">
+🌳 The Enchanted Forest
+</div>
+
+<div class="progress">
+Page 3 of 8
+</div>
+
+<div class="caption">
+
+Deep inside a magical forest,
+Lanaya met a wise elephant.
+
+<br><br>
+
+<b>
+Kindness is a treasure greater than gold.
+</b>
+
+</div>
+
+<div class="nav-buttons">
+
+<button onclick="previousScene()">
+⬅ Previous
+</button>
+
+<button onclick="nextScene()">
+Next ➡
+</button>
+
+</div>
+
+</div>
+
+<!-- PAGE 4 -->
+
+<div class="scene">
+
+<img class="story-image"
+src="Mountain of Courage.png">
+
+<div class="chapter">
+Mountain of Courage
+</div>
+
+<div class="progress">
+Page 4 of 8
+</div>
+
+<div class="caption">
+Every step takes you closer to your dreams.
+</div>
+
+<div class="nav-buttons">
+
+<button onclick="previousScene()">
+⬅ Previous
+</button>
+
+<button onclick="nextScene()">
+Next ➡
+</button>
+
+</div>
+
+</div>
+
+<!-- PAGE 5 -->
+
+<div class="scene">
+
+<img class="story-image"
+src="Lake of Dreams.png">
+
+<div class="chapter">
+The Lake of Dreams
+</div>
+
+<div class="progress">
+Page 5 of 8
+</div>
+
+<div class="caption">
+A place where dreams, adventures and future possibilities come alive.
+</div>
+
+<div class="nav-buttons">
+
+<button onclick="previousScene()">
+⬅ Previous
+</button>
+
+<button onclick="nextScene()">
+Next ➡
+</button>
+
+</div>
+
+</div>
+
+<!-- PAGE 6 -->
+
+<div class="scene">
+
+<div class="chapter">
+🎁 The Golden Treasure Chest
+</div>
+
+<div class="progress">
+Page 6 of 8
+</div>
+
+<div class="caption">
+
+At the end of her journey,
+Lanaya discovered a magical treasure chest.
+
+<br><br>
+
+✨ Kindness<br>
+⭐ Courage<br>
+💖 Dreams
+
+</div>
+
+<div class="nav-buttons">
+
+<button onclick="previousScene()">
+⬅ Previous
+</button>
+
+<button onclick="nextScene()">
+Next ➡
+</button>
+
+</div>
+
+</div>
+
+<!-- PAGE 7 -->
+
+<div class="scene">
+
+<img class="story-image"
+src="Message from Uncle Ranmal.png">
+
+<div class="chapter">
+A Message Just For You
+</div>
+
+<div class="progress">
+Page 7 of 8
+</div>
+
+<div class="nav-buttons">
+
+<button onclick="previousScene()">
+⬅ Previous
+</button>
+
+<button onclick="nextScene()">
+Next ➡
+</button>
+
+</div>
+
+</div>
+
+<!-- PAGE 8 -->
+
+<div class="scene">
+
+<div class="chapter">
+🎂 Happy 10th Birthday Lanaya! 🎂
+</div>
+
+<div class="progress">
+Page 8 of 8
+</div>
+
+<div class="caption">
+
+May your year be filled with:
+
+<br><br>
+
+✨ Adventure<br>
+📚 Wonderful Stories<br>
+🌈 Creativity<br>
+💖 Friendship<br>
+⭐ Dreams That Come True
+
+</div>
+
+<div class="memory-star"
+onclick="showMemory()">
+
+⭐
+
+</div>
+
+<div id="memory"
+class="memory-message">
+
+Uncle Ranmal in New Zealand created this adventure especially for you.
+
+<br><br>
+
+Keep dreaming.<br>
+Keep exploring.<br>
+Keep shining.
+
+<br><br>
+
+❤️
+
+</div>
+
+<div class="nav-buttons">
+
+<button onclick="goHome()">
+🔄 Start Again
+</button>
+
+<button onclick="launchConfetti()">
+🎊 Celebrate
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+let currentScene = 0;
+
+const scenes =
+document.querySelectorAll('.scene');
+
+function showScene(index,direction='next'){
+
+    if(index < 0 ||
+       index >= scenes.length){
+        return;
+    }
+
+    scenes.forEach(scene=>{
+        scene.classList.remove(
+            'active',
+            'slide-left',
+            'slide-right'
+        );
+    });
+
+    const nextSceneObj =
+    scenes[index];
+
+    if(direction==='next'){
+        nextSceneObj.classList.add('slide-left');
+    }
+    else{
+        nextSceneObj.classList.add('slide-right');
+    }
+
+    nextSceneObj.classList.add('active');
+
+    currentScene = index;
+
+}
+
+function nextScene(){
+
+    if(currentScene <
+       scenes.length-1){
+
+        showScene(
+            currentScene+1,
+            'next'
+        );
+    }
+
+}
+
+function previousScene(){
+
+    if(currentScene > 0){
+
+        showScene(
+            currentScene-1,
+            'previous'
+        );
+    }
+
+}
+
+function goHome(){
+
+    showScene(0,'previous');
+
+}
+
+function showMemory(){
+
+    document
+      .getElementById('memory')
+      .style.display='block';
+
+}
+
+let touchStartX = 0;
+let touchEndX = 0;
+
+document.addEventListener(
+'touchstart',
+e => {
+
+touchStartX =
+e.changedTouches[0].screenX;
+
+});
+
+document.addEventListener(
+'touchend',
+e => {
+
+touchEndX =
+e.changedTouches[0].screenX;
+
+handleSwipe();
+
+});
+
+function handleSwipe(){
+
+const distance =
+touchEndX - touchStartX;
+
+if(Math.abs(distance) < 50)
+return;
+
+if(distance < 0){
+    nextScene();
+}
+else{
+    previousScene();
+}
+
+}
+
+for(let i=0;i<80;i++){
+
+let star =
+document.createElement('div');
+
+star.className='star';
+
+star.innerHTML='✦';
+
+star.style.left =
+Math.random()*100+'vw';
+
+star.style.top =
+Math.random()*100+'vh';
+
+star.style.animationDelay =
+Math.random()*3+'s';
+
+document.body.appendChild(star);
+
+}
+
+function launchConfetti(){
+
+for(let i=0;i<220;i++){
+
+const c =
+document.createElement('div');
+
+c.className='confetti';
+
+c.style.left =
+Math.random()*100+'vw';
+
+c.style.background =
+[
+'#ff006e',
+'#ffd166',
+'#06d6a0',
+'#118ab2',
+'#ffffff'
+]
+[Math.floor(Math.random()*5)];
+
+document.body.appendChild(c);
+
+c.animate(
+[
+{
+transform:'translateY(0)'
+},
+{
+transform:'translateY(120vh) rotate(720deg)'
+}
+],
+{
+duration:
+3000 + Math.random()*3000,
+iterations:1
+}
+);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
